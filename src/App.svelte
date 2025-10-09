@@ -1,13 +1,22 @@
 <script lang="ts">
   import './app.css';
+  import { currentColor } from "$lib/store/mainColorStore";
+  import InputHex from '$lib/components/modules/InputHex/InputHex.svelte';
+  import ColorSwatch from '$lib/components/modules/ColorSwatch/ColorSwatch.svelte';
 </script>
 
 <main class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4 mx-[2vh] md:mx-[8vh] lg:mx-[12vh] my-[1.5vh]">
   <!-- Canvas Section: Principal area for color work -->
   <section class="bg-blue-500 p-5 rounded-lg min-h-[75vh] order-2 lg:order-1">
     <div class="flex flex-col lg:flex-row gap-4 h-full">
-      <div class="bg-red-500 w-full p-4 rounded">Canvas Principal</div>
-      <div class="bg-red-500 w-full p-4 rounded">Outputs de colores</div>
+      <div class="bg-red-500 w-full p-4 rounded">
+        <h1> Canvas Principal</h1>
+        <InputHex colorStore={currentColor} /> 
+      </div>
+      <div class="bg-red-500 w-full p-4 rounded">
+        <h1 class="text-white">Output de colores</h1>
+        <ColorSwatch />
+      </div>
     </div>
   </section>
 
@@ -35,7 +44,6 @@
         <div class="bg-red-500 p-2 rounded">Texto 1</div>
         <div class="bg-red-500 p-2 rounded">Texto 2</div>
         <div class="bg-red-500 p-2 rounded">Texto 3</div>
-        <div class="bg-red-500 p-2 rounded">Texto 4</div>
       </div>
       
     </div>
