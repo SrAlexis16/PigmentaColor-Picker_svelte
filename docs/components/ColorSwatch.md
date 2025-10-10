@@ -23,19 +23,10 @@ El componente requiere que le pases el Store de color global como una Prop (`col
 
 El componente acepta las siguientes props:
 
-### #1 colorStore
-
-- **Tipo:** `Readable<Color>`
-- **Obligatoria:** Sí
-- **Valor por defecto:** N/A
-- **Descripción:** El Store de Svelte que contiene el objeto de color activo (chroma-js). El componente solo lo lee.
-
-### #2 className
-
-- **Tipo:** `string`
-- **Obligatorio:** No
-- **Valor por defecto:** `h-16 w-16` (tailwind classes)
-- **Descripción:** Clases de utilidad de CSS/Tailwind para personalizar el tamaño, bordes o márgenes del botón Swatch. Svelte fusiona estas clases con el estilo predeterminado.
+| Propiedad | Tipo | Obligatoria | Valor por Defecto | Descripción |
+| :--- | :--- | :--- | :--- | :--- |
+| `colorStore` | `Readable<Color>` | Sí | N/A | El **Store de Svelte** que contiene el objeto de color activo (`chroma-js`). El componente está diseñado para **solo leer** este valor. |
+| `className` | `string` | No | `h-16 w-16` (tailwind classes) | Clases de utilidad de CSS/Tailwind para personalizar el tamaño, bordes o márgenes del botón Swatch. Svelte fusionará estas clases con el estilo predeterminado. |
 
 ## API y Comportamiento
 
