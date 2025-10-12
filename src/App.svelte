@@ -1,51 +1,145 @@
 <script lang="ts">
   import './app.css';
-  import { currentColor } from "$lib/store/mainColorStore";
-  import InputHex from '$lib/components/modules/InputHex/InputHex.svelte';
-  import ColorSwatch from '$lib/components/modules/ColorSwatch/ColorSwatch.svelte';
+  import { currentView, setView } from '$lib/store/viewStore';
+  import DeveloperCanvas from '$lib/views/developer/DeveloperCanvas.svelte';
+  import DeveloperTools from '$lib/views/developer/DeveloperTools.svelte';
+  import { Terminal, Palette, PenTool, ChevronRight, Github, ExternalLink, Heart } from "@lucide/svelte";
+
+  const icons = {
+    developer: Terminal,
+    designer: Palette,
+    artist: PenTool
+  } as const;
+
+  type ViewMode = keyof typeof icons;
 </script>
 
-<main class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-4 mx-[2vh] md:mx-[8vh] lg:mx-[12vh] my-[1.5vh]">
-  <!-- Canvas Section: Principal area for color work -->
-  <section class="bg-blue-500 p-5 rounded-lg min-h-[75vh] order-2 lg:order-1">
-    <div class="flex flex-col lg:flex-row gap-4 h-full">
-      <div class="bg-red-500 w-full p-4 rounded">
-        <h1> Canvas Principal</h1>
-        <InputHex colorStore={currentColor} /> 
+<main class="min-h-screen bg-gray-50 flex flex-col">
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <h1 class="text-xl md:text-3xl font-bold font-outfit text-black">Pigmenta</h1>
       </div>
-      <div class="bg-red-500 w-full p-4 rounded">
-        <h1 class="text-white">Output de colores</h1>
-        <ColorSwatch />
-      </div>
+      
+      <nav class="flex items-center gap-1 bg-gray-100 p-1 rounded-lg" aria-label="View modes">
+        {#each (['developer', 'designer', 'artist'] as ViewMode[]) as view}
+          <button
+            on:click={() => setView(view)}
+            aria-label={`Switch to ${view} view`}
+            aria-current={$currentView === view ? 'page' : undefined}
+            class={`flex items-center gap-2 px-4 py-2 rounded-md text-md font-outfit font-medium transition-all duration-200
+              ${$currentView === view 
+                ? 'bg-white shadow-sm text-gray-900' 
+                : 'text-gray-600 hover:text-gray-800'}
+            `}
+          >
+            {#if icons[view]}
+              {@const Icon = icons[view]}
+              <Icon class="w-5 h-5 block" />
+            {/if}
+
+            <span class="hidden md:inline">
+              {view.charAt(0).toUpperCase() + view.slice(1)}
+            </span>
+          </button>
+        {/each}
+      </nav>
+    </div>
+  </header>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 flex-1">
+    <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_400px] gap-8 lg:gap-12 xl:gap-16 items-start">
+      <article class="flex justify-center">
+        <div class="w-full max-w-[700px] mx-auto">
+          <div class="bg-white rounded-2xl shadow-md border border-gray-200 p-8 md:p-10 lg:p-12">
+            {#if $currentView === 'developer'}
+              <DeveloperCanvas />
+            {:else if $currentView === 'designer'}
+              <div class="h-[600px] flex flex-col items-center justify-center gap-4">
+                <Palette size={48} class="text-gray-300" />
+                <div class="text-center">
+                  <p class="text-sm text-gray-500 mt-1">Coming soon</p>
+                </div>
+              </div>
+            {:else}
+              <div class="h-[600px] flex flex-col items-center justify-center gap-4">
+                <PenTool size={48} class="text-gray-300" />
+                <div class="text-center">
+                  <p class="text-sm text-gray-500 mt-1">Coming soon</p>
+                </div>
+              </div>
+            {/if}
+          </div>
+        </div>
+      </article>
+
+      <aside class="flex flex-col gap-6 lg:gap-10 self-start">
+        <article class="bg-white rounded-2xl shadow-md border border-gray-200 p-8 md:p-10 lg:p-12">
+          {#if $currentView === 'developer'}
+            <DeveloperTools />
+          {:else if $currentView === 'designer'}
+            <div class="h-[400px] flex flex-col items-center justify-center gap-4">
+              <Palette size={40} class="text-gray-300" />
+              <div class="text-center">
+                <p class="text-sm text-gray-500 mt-1">Coming soon</p>
+              </div>
+            </div>
+          {:else}
+            <div class="h-[400px] flex flex-col items-center justify-center gap-4">
+              <PenTool size={40} class="text-gray-300" />
+              <div class="text-center">
+                <p class="text-sm text-gray-500 mt-1">Coming soon</p>
+              </div>
+            </div>
+          {/if}
+        </article>
+
+        <article class="flex flex-col gap-4 font-rubik">
+          <a 
+            rel="noopener noreferrer" 
+            target="_blank" 
+            href="https://www.colorsexplained.com/color-theory/" 
+            aria-label="Resources (opens in new tab)"
+            class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:border-gray-300 transition-colors group"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-medium text-neutral-600 group-hover:text-neutral-900">Resources</span>
+              <div class="flex items-center gap-1">
+                <ExternalLink size={14} class="text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <ChevronRight size={18} class="text-gray-600"/>
+              </div>
+            </div>
+          </a>
+
+          <a 
+            rel="noopener noreferrer" 
+            target="_blank" 
+            href="https://github.com/SrAlexis16/PigmentaColor-Picker_svelte" 
+            aria-label="GitHub Repository (opens in new tab)"
+            class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:border-gray-300 transition-colors group"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-medium text-neutral-600 group-hover:text-neutral-900">GitHub Repo</span>
+              <div class="flex items-center gap-1">
+                <ExternalLink size={14} class="text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <Github size={18} class="text-gray-600" />
+              </div>
+            </div>
+          </a>
+        </article>
+      </aside>
     </div>
   </section>
 
-  <!-- Sidebar Section: Controls and information -->
-  <aside class="bg-green-500 p-5 rounded-lg order-1 lg:order-2 lg:min-h-[92vh]">
-    <div class="flex flex-row lg:flex-col gap-4 h-full">
-      
-      <!-- Mobile-only controls -->
-      <button class="bg-red-500 p-3 rounded md:hidden flex-1">
-        Boton de despliegue
-      </button>
-      <button class="bg-red-500 p-3 rounded md:hidden flex-1">
-        Boton de vistas
-      </button>
-
-      <!-- Desktop/Tablet action buttons -->
-      <div class="hidden md:flex flex-row gap-4 bg-yellow-500 p-1 rounded justify-end">
-        <button class="bg-pink-500 px-3 py-1 rounded">Boton 1</button>
-        <button class="bg-pink-500 px-3 py-1 rounded">Boton 2</button>
-        <button class="bg-pink-500 px-3 py-1 rounded">Boton 3</button>
-      </div>
-
-      <!-- Desktop-only text information -->
-      <div class="hidden lg:flex lg:flex-col gap-4 bg-yellow-500 p-3 rounded flex-1">
-        <div class="bg-red-500 p-2 rounded">Texto 1</div>
-        <div class="bg-red-500 p-2 rounded">Texto 2</div>
-        <div class="bg-red-500 p-2 rounded">Texto 3</div>
-      </div>
-      
+  <footer class="mt-auto border-t border-gray-200 bg-white font-rubik text-center justify-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <p class="text-sm text-gray-600 flex justify-center items-center gap-1">
+        Made with <span class="text-red-500"><Heart/></span> by 
+        <a href="https://github.com/SrAlexis16" class="underline hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer">
+          Alexis
+        </a>
+      </p>
+      <p class="text-xs text-gray-500 mt-1">V1.0.0</p>
     </div>
-  </aside>
+  </footer>
 </main>
