@@ -10,11 +10,8 @@ El componente requiere que le pases un **Writable Store** que contenga el objeto
 </script>
 
 <div class="p-4">
-    <PigmentaInputHex colorStore={currentColor} /> 
-    
     <PigmentaInputHex 
         colorStore={currentColor} 
-        weight="w-full"
     />
 </div>
 ```
@@ -26,7 +23,6 @@ El componente acepta las siguientes propiedades:
 | Propiedad | Tipo | Obligatoria | Valor por Defecto | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
 | `colorStore` | `Writable<Color>` | Sí | N/A | El **Store de Svelte** que contiene el objeto de color activo (`chroma-js`). El componente debe poder **escribir** en él. |
-| `weight` | `string` | No | `w-[250px]` | Clase de utilidad para personalizar el **ancho** máximo del input. |
 
 
 ## API y Comportamiento
@@ -45,8 +41,8 @@ El componente acepta las siguientes propiedades:
 
 | Variable de Control | Clase Condicional |
 | :--- | :--- |
-| `borderValid` (`border-gray-300`) | Borde visible cuando el valor es válido. |
-| `borderInvalid` (`border-red-300`) | Borde rojo visible cuando el valor es inválido o incompleto. |
+| `borderValid` (`focus:border-blue-400`) | Borde visible cuando el valor es válido. |
+| `borderInvalid` (`focus:border-red-400`) | Borde rojo visible cuando el valor es inválido o incompleto. |
 
 ##### **Estas pueden ser actualizadas en cualquier momento.**
 ## ⚠️ Dependencias Clave
