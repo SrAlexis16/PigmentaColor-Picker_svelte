@@ -83,7 +83,7 @@ El componente acepta las siguientes propiedades:
 | **Cursor Posicionado** | El cursor circular se posiciona dinámicamente usando `left: {cursorX}%; top: {cursorY}%` con `transform: translate(-50%, -50%)` para centrarlo. |
 | **Efecto de Arrastre** | El cursor escala 20% (`scale(1.2)`) cuando `isDragging` es `true`, con transición suave de 0.1s. |
 | **Borde Doble** | El cursor tiene un borde blanco de 2px y una sombra negra semitransparente para visibilidad en todos los fondos. |
-| **Tamaño del Selector** | Por defecto ocupa 75% del ancho del contenedor con `aspect-ratio: 1` (cuadrado) y altura del 35%. Altamente personalizable con CSS. |
+| **Tamaño del Selector** | Por defecto ocupa 100% del ancho del contenedor con `aspect-ratio: 1` (cuadrado) y altura del 100%. Altamente personalizable con CSS. |
 
 ## Uso Integrado con Sliders HSV
 
@@ -156,8 +156,8 @@ El componente expone una variable CSS personalizable:
 ```css
 .color-selector {
   /* Variables que puedes sobrescribir */
-  width: 75%;           /* Ancho relativo al contenedor */
-  height: 35%;          /* Altura relativa al contenedor */
+  width: 100%;           /* Ancho relativo al contenedor */
+  height: 100%;          /* Altura relativa al contenedor */
   aspect-ratio: 1;      /* Mantiene forma cuadrada */
   border-radius: 1rem;  /* Radio de bordes */
 }
