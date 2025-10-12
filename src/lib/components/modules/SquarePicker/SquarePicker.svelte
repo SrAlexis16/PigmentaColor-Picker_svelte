@@ -83,8 +83,8 @@
 <style>
     .color-selector {
         position: relative;
-        width: 75%;
-        height: 35%;
+        width: 100%;
+        height: 100%;
         aspect-ratio: 1;
         cursor: crosshair;
         touch-action: none;

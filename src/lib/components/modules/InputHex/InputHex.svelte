@@ -4,11 +4,8 @@
 
     export let colorStore: Writable<chroma.Color>;
 
-    // Ajustar estas lineas si es necesario
-    export const borderValid: string = 'border-gray-300';  
-    export const borderInvalid: string = 'border-red-300'; 
-
-    export let weight: string = 'w-[200px]'
+    export const borderValid: string = 'focus:border-blue-400';  
+    export const borderInvalid: string = 'focus:border-red-400';
 
     let inputHexValue: string = '';
     let isInvalid = false;
@@ -53,7 +50,7 @@
     on:input={handleInput}
     on:blur={handleBlur}
     class={`
-        ${weight} bg-gray-50 px-2 py-1 rounded-lg border-2 outline-none
+        w-full bg-white rounded-2xl shadow-md border border-gray-200 p-2 rounded-lg cursor-text transition-all duration-150 text-sm max-w-55 focus:outline
         ${isInvalid ? borderInvalid : borderValid}
     `}
 />
