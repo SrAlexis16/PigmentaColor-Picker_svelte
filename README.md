@@ -95,8 +95,8 @@ src/
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/SrAlexis16/KuantumDashboard.git
-cd KuantumDashboard
+git clone https://github.com/SrAlexis16/PigmentaColor-Picker_svelte.git
+cd PigmentaColor-Picker_svelte
 
 # Instalar dependencias
 npm install
@@ -155,4 +155,4 @@ Para seguir el progreso detallado, consulta el [Pigmenta Roadmap](https://github
 
 **Pigmenta V2.0.0** - Vistas especializadas para cada workflow | Arquitectura modular escalable
 
-**/README.md v3.0.0** - Última actualización: Octubre 2025
+**/README.md v3.0.1** - Última actualización: Octubre 2025
