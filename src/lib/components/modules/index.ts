@@ -1,4 +1,5 @@
 export { default as SquarePicker } from "$lib/components/modules/SquarePicker/SquarePicker.svelte";
+export { default as WheelPicker } from "$lib/components/modules/WheelPicker/WheelPicker.svelte"
 export { default as ColorSwatch } from "$lib/components/modules/ColorSwatch/ColorSwatch.svelte"
 
 export { default as BrightnessSlider} from "$lib/components/modules/BrightnessSlider/BrightnessSlider.svelte"
