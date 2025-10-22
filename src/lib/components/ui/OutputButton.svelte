@@ -24,7 +24,9 @@
   on:click={copy}
 >
   <span class="flex items-center justify-between gap-2">
-    {value}
+    <slot>
+      {value}
+    </slot>
     
     {#if copied}
       <Check size={14} color="#3e9c1c"/>

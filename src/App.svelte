@@ -1,9 +1,19 @@
 <script lang="ts">
   import './app.css';
   import { currentView, setView } from '$lib/store/viewStore';
+
   import DeveloperCanvas from '$lib/views/developer/DeveloperCanvas.svelte';
   import DeveloperTools from '$lib/views/developer/DeveloperTools.svelte';
-  import { Terminal, Palette, PenTool, ChevronRight, Github, ExternalLink, Heart } from "@lucide/svelte";
+
+  import DesignerCanvas from '$lib/views/designer/DesignerCanvas.svelte';
+  import DesignerTools from '$lib/views/designer/DesignerTools.svelte';
+
+  import ArtistTools from '$lib/views/artist/ArtistTools.svelte';
+  import ArtistCanvas from '$lib/views/artist/ArtistCanvas.svelte';
+
+  import ResourcesDialog from '$lib/components/ui/ResourcesDialog.svelte';
+
+  import { Terminal, Palette, PenTool, Github, ExternalLink, Heart } from "@lucide/svelte";
 
   const icons = {
     developer: Terminal,
@@ -55,19 +65,9 @@
             {#if $currentView === 'developer'}
               <DeveloperCanvas />
             {:else if $currentView === 'designer'}
-              <div class="h-[600px] flex flex-col items-center justify-center gap-4">
-                <Palette size={48} class="text-gray-300" />
-                <div class="text-center">
-                  <p class="text-sm text-gray-500 mt-1">Coming soon</p>
-                </div>
-              </div>
+                <DesignerCanvas />
             {:else}
-              <div class="h-[600px] flex flex-col items-center justify-center gap-4">
-                <PenTool size={48} class="text-gray-300" />
-                <div class="text-center">
-                  <p class="text-sm text-gray-500 mt-1">Coming soon</p>
-                </div>
-              </div>
+                <ArtistCanvas />
             {/if}
           </div>
         </div>
@@ -78,38 +78,14 @@
           {#if $currentView === 'developer'}
             <DeveloperTools />
           {:else if $currentView === 'designer'}
-            <div class="h-[400px] flex flex-col items-center justify-center gap-4">
-              <Palette size={40} class="text-gray-300" />
-              <div class="text-center">
-                <p class="text-sm text-gray-500 mt-1">Coming soon</p>
-              </div>
-            </div>
+              <DesignerTools />
           {:else}
-            <div class="h-[400px] flex flex-col items-center justify-center gap-4">
-              <PenTool size={40} class="text-gray-300" />
-              <div class="text-center">
-                <p class="text-sm text-gray-500 mt-1">Coming soon</p>
-              </div>
-            </div>
+              <ArtistTools />
           {/if}
         </article>
 
         <article class="flex flex-col gap-4 font-rubik">
-          <a 
-            rel="noopener noreferrer" 
-            target="_blank" 
-            href="https://www.colorsexplained.com/color-theory/" 
-            aria-label="Resources (opens in new tab)"
-            class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:border-gray-300 transition-colors group"
-          >
-            <div class="flex items-center justify-between">
-              <span class="text-sm font-medium text-neutral-600 group-hover:text-neutral-900">Resources</span>
-              <div class="flex items-center gap-1">
-                <ExternalLink size={14} class="text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <ChevronRight size={18} class="text-gray-600"/>
-              </div>
-            </div>
-          </a>
+          <ResourcesDialog />
 
           <a 
             rel="noopener noreferrer" 
